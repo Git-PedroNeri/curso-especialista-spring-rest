@@ -10,22 +10,22 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.httpBasic()
-			
-			.and()
-			.authorizeRequests()
-				.antMatchers("/v1/cozinhas/**").permitAll()
-				.anyRequest().authenticated()
-			
-			.and()
-			.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				
-			.and()
-				.csrf().disable();
-	}
-	
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .httpBasic()
+
+                .and()
+                .authorizeRequests()
+                .antMatchers("/v1/cozinhas/**").permitAll()
+                .anyRequest().authenticated()
+
+                .and()
+                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//Remove JSessionId da sessao
+
+                .and()
+                .csrf().disable();
+    }
+
 }

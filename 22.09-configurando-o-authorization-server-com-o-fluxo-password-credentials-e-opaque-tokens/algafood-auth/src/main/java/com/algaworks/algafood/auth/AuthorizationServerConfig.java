@@ -13,26 +13,34 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private AuthenticationManager authenticationManager;
-	
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients
-			.inMemory()
-				.withClient("algafood-web")
-				.secret(passwordEncoder.encode("web123"))
-				.authorizedGrantTypes("password")
-				.scopes("write", "read")
-				.accessTokenValiditySeconds(60 * 60 * 6); // 6 horas (padrão é 12 horas)
-	}
-	
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager);
-	}
-	
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+
+
+        clients
+                .inMemory()
+                    .withClient("twitter")
+                    .secret(passwordEncoder.encode("twt@123"))
+                    .authorizedGrantTypes("password")
+                .scopes("ESCRITA,LEITURA")
+                    .accessTokenValiditySeconds(60 * 60 * 6)
+                .and()
+                    .withClient("algafood-web")
+                    .secret(passwordEncoder.encode("web123"))
+                    .authorizedGrantTypes("password")
+                .scopes("write", "read")
+                    .accessTokenValiditySeconds(60 * 60 * 6); // 6 horas (padrão é 12 horas)
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.authenticationManager(authenticationManager);
+    }
+
 }

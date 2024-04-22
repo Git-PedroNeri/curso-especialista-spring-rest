@@ -19,15 +19,17 @@ public class ModelMapperConfig {
 //		modelMapper.createTypeMap(Restaurante.class, RestauranteModel.class)
 //			.addMapping(Restaurante::getTaxaFrete, RestauranteModel::setPrecoFrete);
 		
-		modelMapper.createTypeMap(ItemPedidoInput.class, ItemPedido.class)
-			.addMappings(mapper -> mapper.skip(ItemPedido::setId));
-		
-		var enderecoToEnderecoModelTypeMap = modelMapper.createTypeMap(
-				Endereco.class, EnderecoModel.class);
-		
-		enderecoToEnderecoModelTypeMap.<String>addMapping(
-				enderecoSrc -> enderecoSrc.getCidade().getEstado().getNome(),
-				(enderecoModelDest, value) -> enderecoModelDest.getCidade().setEstado(value));
+//		modelMapper.createTypeMap(ItemPedidoInput.class, ItemPedido.class)
+//			.addMappings(mapper -> mapper.skip(ItemPedido::setId));
+//
+//		var enderecoToEnderecoModelTypeMap = modelMapper.createTypeMap(
+//				Endereco.class, EnderecoModel.class);
+//
+//		enderecoToEnderecoModelTypeMap.<String>addMapping(
+//				enderecoSrc -> enderecoSrc.getCidade().getEstado().getNome(),
+//				(enderecoModelDest, value) -> enderecoModelDest.getCidade().setEstado(value));
+
+
 		
 		return modelMapper;
 	}

@@ -10,7 +10,9 @@ import javax.validation.Valid;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
@@ -49,8 +51,17 @@ public class RestauranteController {
 	private SmartValidator validator;
 	
 	@GetMapping
-	public List<Restaurante> listar() {
-		return restauranteRepository.findAll();
+	public ResponseEntity<List<Restaurante>> listar() {
+
+		List<Restaurante> all = restauranteRepository.findAll();
+
+
+//		return ResponseEntity.ok()
+//				.header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,"http://www.algafood.local:8000")
+//				.body(all);
+
+		return ResponseEntity.ok()
+				.body(all);
 	}
 	
 	@GetMapping("/{restauranteId}")

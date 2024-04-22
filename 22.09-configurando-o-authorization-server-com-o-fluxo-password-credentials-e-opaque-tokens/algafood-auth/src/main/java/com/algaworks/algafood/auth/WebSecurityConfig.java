@@ -13,27 +13,34 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("thiago")
-				.password(passwordEncoder().encode("123"))
-				.roles("ADMIN")
-			.and()
-			.withUser("joao")
-				.password(passwordEncoder().encode("123"))
-				.roles("ADMIN");
-	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	@Bean
-	@Override
-	protected AuthenticationManager authenticationManager() throws Exception {
-		return super.authenticationManager();
-	}
-	
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("thiago")
+                .password(passwordEncoder().encode("123"))
+                .roles("ADMIN")
+                .and()
+                .withUser("joao")
+                .password(passwordEncoder().encode("123"))
+                .roles("ADMIN")
+                .and()
+                .withUser("bruce")
+                .password(passwordEncoder().encode("bruce123"))
+                .roles("ADMIN")
+        ;
+
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
 }
